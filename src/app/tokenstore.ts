@@ -59,7 +59,15 @@ export const usePastPaperStore = create<PastPaperState>((set) => ({
 
 export const useLearningCardStore = create<SpacedRepetitionCardState>((set) => ({
     Cards: [],
-    setCards: (data: SpacedRepetitionCard[]) => set({ Cards: data }),
+    setCards: (data) => set({ Cards: data }),
+    updateCard: (questionNumber, updates) =>
+        set(state => ({
+            Cards: state.Cards.map(card =>
+                card.question_number === questionNumber
+                    ? { ...card, ...updates }
+                    : card
+            )
+        }))
 }));
 
 

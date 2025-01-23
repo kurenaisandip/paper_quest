@@ -6,6 +6,7 @@ import PQ from "../../../../../public/image/Paperbanner.png";
 import ReactCardFlip from "react-card-flip";
 import {useLearningCardStore} from "@/app/tokenstore";
 import {SpacedRepetitionCard} from "@/app/Models/Types";
+import SpacedRepetitionSystem from "@/app/(public)/user/subject/components/SpacedRepetitionSystem";
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,6 +14,12 @@ const Page = () => {
   const [currentCard, setCurrentCard] = useState({ question: "", answer: "" });
 
   const [isAnswerShown, setIsAnswerShown] = useState(false);
+
+  const [isComponentVisible, setComponentVisible] = useState(false);
+
+  const toggleComponent = () => {
+    setComponentVisible(!isComponentVisible);
+  };
 
 
     const [currentIndex, setCurrentIndex] = useState(0); // Track current question index
@@ -154,12 +161,13 @@ const Page = () => {
             <div>
               <div>Cards</div>
               <div>Due Cards</div>
-               {/*<Button onClick={() => openModal(cards[0])}>Learn</Button>*/}
+              <Button onClick={toggleComponent}>Learn</Button>
             </div>
           </div>
         </div>
       </div>
 
+      {isComponentVisible && <SpacedRepetitionSystem />}
       {/* Card List */}
       <div className="p-6 bg-gray-100 min-h-screen">
         <h1 className="text-2xl font-bold text-center mb-6">Cards</h1>

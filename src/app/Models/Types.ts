@@ -65,14 +65,19 @@ export interface LearningDeck {
     totalquestions: number;
 }
 
+
 export interface SpacedRepetitionCard {
-    question_number : number;
+    question_number: number;
     question: string;
     answer: string;
     score: number;
+    nextReview?: Date;
+    interval?: number;
+    easeFactor?: number;
 }
 
 export interface SpacedRepetitionCardState {
     Cards: SpacedRepetitionCard[];
     setCards: (data: SpacedRepetitionCard[]) => void;
+    updateCard: (questionNumber: number, updates: Partial<SpacedRepetitionCard>) => void;
 }
