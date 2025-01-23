@@ -42,7 +42,7 @@ const page = () => {
     };
 
     fetchLearningDeck();
-  }, [userId, token]);
+  }, [userId]);
 
   const cards = [
     {

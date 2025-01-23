@@ -12,11 +12,11 @@ export const footerLinks = [
     title: "For ",
     children: [
       {
-        label: "Book table",
+        label: "Past Paper",
         url: "/",
       },
       {
-        label: "View Menu",
+        label: "View Past Paper",
         url: "/how-it-works",
       },
       {

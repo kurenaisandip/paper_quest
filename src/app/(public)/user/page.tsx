@@ -111,8 +111,8 @@ const page = () => {
         <div>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <h2 className="text-xl font-bold mb-4">Welcome to the User Page!</h2>
-                <p className="text-gray-700">Institution name</p>
-                <input type="text"/>
+                {/*<p className="text-gray-700">Institution name</p>*/}
+                {/*<input type="text"/>*/}
                 <form>
                     {/* Institution Name */}
                     <div className="mb-4">
