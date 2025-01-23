@@ -1,7 +1,6 @@
 "use client";
 import { Button, Progress } from "antd";
 import React, { useState } from "react";
-import ReactCardFlip from "react-card-flip";
 import Image from "next/image";
 import PQ from "../../../../../public/image/Paperbanner.png";
 import ReactCardFlip from "react-card-flip";
@@ -151,11 +150,11 @@ const Page = () => {
       <div className="mx-[128px] my-10">
         <div className="flex items-center justify-center">
           <div className="flex gap-4 items-center">
-            <Progress type="circle" percent={75} />
+            <Progress type="circle" percent={0} />
             <div>
               <div>Cards</div>
               <div>Due Cards</div>
-              {/* <Button onClick={() => openModal(cards[0])}>Learn</Button> */}
+               {/*<Button onClick={() => openModal(cards[0])}>Learn</Button>*/}
             </div>
           </div>
         </div>
@@ -165,7 +164,7 @@ const Page = () => {
       <div className="p-6 bg-gray-100 min-h-screen">
         <h1 className="text-2xl font-bold text-center mb-6">Cards</h1>
         <div className="flex flex-wrap gap-4 justify-center">
-          {cards.map((card) => (
+          {card.map((card) => (
             <div
               key={card.id}
               className="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4"

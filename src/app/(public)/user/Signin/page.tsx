@@ -77,12 +77,12 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateEmail(email)) {
-      setEmailError("Please enter a valid email address.");
-      return;
-    }
-
-    setEmailError("");
+    // if (!validateEmail(email)) {
+    //   setEmailError("Please enter a valid email address.");
+    //   return;
+    // }
+    //
+    // setEmailError("");
     mutation.mutate();
 
     //   const userDetails = create((set) => ({
