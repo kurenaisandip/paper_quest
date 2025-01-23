@@ -2,7 +2,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import {QueryClient, QueryClientProvider, useQueryClient} from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,19 +31,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-    const queryClient = new QueryClient();
+  const queryClient = new QueryClient();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+          <ToastContainer position="top-right" autoClose={5000} />
+          {children}
+        </QueryClientProvider>
       </body>
     </html>
   );
 }
-
-

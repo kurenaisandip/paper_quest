@@ -91,51 +91,65 @@ const Problem = () => {
     }
   };
   return (
-    <div className="my-[64px]">
-      <div className="flex">
-        <div className="w-[80%] ml-[128px] mr-[32px]">
-          <div className="grid grid-cols-4">
-            {cardData
-              .slice(currentIndex, currentIndex + cardsPerPage)
-              .map((card) => (
-                <div key={card.id} className="flex-1 mx-2">
-                  <Card title={card.title} description={card.description} />
-                </div>
-              ))}
+    <div className="my-16 px-4 md:px-8">
+      <div className="flex flex-col xl:flex-row">
+        {/* Main Content (80%) */}
+        <div className="md:w-[80%] md:ml-[128px] md:mr-[32px] w-full">
+          <div className="px-4">
+            {/* Card Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {cardData
+                .slice(currentIndex, currentIndex + cardsPerPage)
+                .map((card) => (
+                  <div key={card.id} className="flex-1">
+                    <Card title={card.title} description={card.description} />
+                  </div>
+                ))}
+            </div>
+
+            {/* Pagination */}
+            <div className="flex flex-wrap justify-between items-center mt-4 gap-2">
+              <button
+                onClick={prev}
+                disabled={currentIndex === 0}
+                className="px-4 py-2 bg-gray-300 text-black rounded disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+              >
+                Prev
+              </button>
+              <span className="text-sm text-gray-500 text-center w-full sm:w-auto">
+                Page {Math.ceil(currentIndex / cardsPerPage) + 1} of{" "}
+                {Math.ceil(cardData.length / cardsPerPage)}
+              </span>
+              <button
+                onClick={next}
+                disabled={currentIndex + cardsPerPage >= cardData.length}
+                className="px-4 py-2 bg-gray-300 text-black rounded disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+              >
+                Next
+              </button>
+            </div>
           </div>
-          <div className="flex justify-between mt-4">
-            <button
-              onClick={prev}
-              disabled={currentIndex === 0}
-              className="px-4 py-2 bg-gray-300 text-black rounded disabled:opacity-50"
-            >
-              Prev
-            </button>
-            <button
-              onClick={next}
-              disabled={currentIndex + cardsPerPage >= cardData.length}
-              className="px-4 py-2 bg-gray-300 text-black rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-          <div className="mt-[64px]">
+
+          {/* Additional Sections */}
+          <div className="mt-16">
             <Study />
           </div>
-          <div className="mt-[64px]">
+          <div className="mt-16">
             <ProblemTable />
           </div>
         </div>
 
         {/* Sidebar (20%) */}
-        <div className="w-[20%]  flex justify-center">
-          <div>
-            <StyledCalendarWrapper className="shadow-lg   ">
-              <Calendar value={date} className="rounded-lg" />
+        <div className="xl:w-[20%] w-full mt-8 md:mt-0 flex justify-center">
+          <div className="w-full max-w-xs">
+            <StyledCalendarWrapper className="shadow-lg">
+              <Calendar value={date} className="rounded-lg w-full" />
             </StyledCalendarWrapper>
           </div>
         </div>
       </div>
+      {/* </div> */}
+
       {/* <div>
         <Study />
       </div> */}

@@ -1,6 +1,6 @@
 "use client";
 import { Button, Progress } from "antd";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import Chat from "./components/chat";
 import Image from "next/image";
@@ -8,9 +8,9 @@ import PQ from "../../../../../public/image/Paperbanner.png";
 import ReactCardFlip from "react-card-flip";
 import Card from "./components/Card";
 import Chats from "./components/chats";
-import useTokenStore, {useUserDetails} from "@/app/tokenstore";
+import useTokenStore, { useUserDetails } from "@/app/tokenstore";
 import axios from "axios";
-import {LearningDeck} from "@/app/Models/Types";
+import { LearningDeck } from "@/app/Models/Types";
 
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,13 +26,13 @@ const page = () => {
     const fetchLearningDeck = async () => {
       try {
         const response = await axios.get(
-            `http://localhost:5030/api/spaced-repetition/GetLearningDeck/${userId}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
+          `http://localhost:5030/api/spaced-repetition/GetLearningDeck/${userId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
         setLearningDeck(response.data);
@@ -155,13 +155,15 @@ const page = () => {
         </div>
         {/* Modal */}
         {isModalVisible && (
-          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold">Card Details</h2>
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-40 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-6xl">
+              <div className="flex justify-between items-center border-b pb-4">
+                <h2 className="text-2xl font-semibold text-gray-800">
+                  Card Details
+                </h2>
                 <button
                   onClick={handleCloseModal}
-                  className="text-lg font-semibold text-gray-700"
+                  className="text-xl font-semibold text-gray-600 hover:text-gray-800"
                 >
                   X
                 </button>
@@ -171,22 +173,26 @@ const page = () => {
               <div className="mt-6">
                 <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
                   {/* Front Side */}
-                  <div className="w-full h-48 bg-blue-500 text-white flex flex-col items-center justify-center rounded-lg shadow-md ">
-                    <p>Card Front: Click to Learn</p>
+                  <div className="w-full h-64 bg-gray-100 text-gray-700 flex flex-col items-center justify-center rounded-lg shadow-sm">
+                    <p className="text-center text-lg">
+                      Card Front: Click to Learn
+                    </p>
                     <button
                       onClick={handleFlip}
-                      className="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md"
+                      className="mt-4 bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 transition"
                     >
                       Flip to Back
                     </button>
                   </div>
 
                   {/* Back Side */}
-                  <div className="w-full h-48 bg-green-500 text-white flex flex-col items-center justify-center rounded-lg shadow-md">
-                    <p>Card Back: This is the answer or content.</p>
+                  <div className="w-full h-64 bg-gray-200 text-gray-700 flex flex-col items-center justify-center rounded-lg shadow-sm">
+                    <p className="text-center text-lg">
+                      Card Back: This is the answer or content.
+                    </p>
                     <button
                       onClick={handleFlip}
-                      className="mt-4 bg-blue-700 text-white px-4 py-2 rounded-md"
+                      className="mt-4 bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 transition"
                     >
                       Flip Back to Front
                     </button>
@@ -196,6 +202,7 @@ const page = () => {
             </div>
           </div>
         )}
+
         {/* pdf below question and answer ko tala xa */}
         {/* <div>
           <div className="w-1/2 mt-[64px] p-4 border-gray border-2 rounded-lg">
@@ -227,13 +234,13 @@ const page = () => {
           </div>
         </div> */}
         <div className="mt-6 flex flex-wrap gap-6 item-center justify-center">
-          {learningDeck.map((item : LearningDeck) => (
-              <Card
-                  key={item.pastPaperId}
-                  pastPaperId={item.pastPaperId}
-                  title={item.title}
-                  totalquestions={item.totalquestions}
-              />
+          {learningDeck.map((item: LearningDeck) => (
+            <Card
+              key={item.pastPaperId}
+              pastPaperId={item.pastPaperId}
+              title={item.title}
+              totalquestions={item.totalquestions}
+            />
           ))}
         </div>
       </div>

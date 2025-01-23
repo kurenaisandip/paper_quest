@@ -43,14 +43,14 @@ const Study = () => {
   ];
 
   return (
-    <div className="">
+    <div className="my-8">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Study Plan</h2>
         <a href="#" className="text-blue-500 hover:underline text-sm">
           See all
         </a>
       </div>
-      <div className="grid grid-cols-3 gap-6 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {studyPlans.map((plan) => (
           <div
             key={plan.id}
