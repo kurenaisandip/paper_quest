@@ -10,6 +10,11 @@ export default function SpacedRepetitionSystem() {
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
 
+    // Get sorted due cards
+    const dueCards = Cards
+        .filter(card => new Date(card.nextReview!) <= new Date())
+        .sort((a, b) => new Date(a.nextReview!).getTime() - new Date(b.nextReview!).getTime());
+
     // Initialize cards with spaced repetition properties
     useEffect(() => {
         if (Cards.length > 0 && !Cards[0].interval) {
@@ -35,7 +40,9 @@ export default function SpacedRepetitionSystem() {
     };
 
     const handleUserResponse = (ease: number) => {
-        const currentCard = Cards[currentCardIndex];
+        if (!dueCards[currentCardIndex]) return;
+
+        const currentCard = dueCards[currentCardIndex];
         const newInterval = getNextInterval(ease, currentCard.interval || MIN_INTERVAL);
 
         const nextReview = new Date();
@@ -48,7 +55,8 @@ export default function SpacedRepetitionSystem() {
         });
 
         setShowAnswer(false);
-        setCurrentCardIndex(prev => (prev + 1) % Cards.length);
+        // Move to next due card or reset
+        setCurrentCardIndex(prev => (prev + 1) % dueCards.length);
     };
 
     const formatInterval = (minutes: number) => {
@@ -57,16 +65,22 @@ export default function SpacedRepetitionSystem() {
         return `${Math.round(minutes/1440)}d`;
     };
 
-    const currentCard = Cards[currentCardIndex];
+    if (dueCards.length === 0) {
+        return (
+            <div className="max-w-3xl mx-auto my-8 text-center p-6 text-gray-500">
+                No cards due for review. Come back later!
+            </div>
+        );
+    }
 
-    if (!currentCard || !currentCard.nextReview) return null;
+    const currentCard = dueCards[currentCardIndex];
 
     return (
         <div className="max-w-3xl mx-auto my-8">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div className="p-6">
                     <div className="mb-4 text-sm text-gray-500">
-                        Question {currentCard.question_number} of {Cards.length}
+                        Due Card {currentCardIndex + 1} of {dueCards.length}
                     </div>
 
                     <h2 className="text-xl font-semibold mb-6 text-gray-800">
