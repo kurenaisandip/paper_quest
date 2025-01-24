@@ -21,8 +21,8 @@ const Learn: React.FC<LearningCardState> = ({ cards }): JSX.Element => {
             title={courseItem?.title || "Untitled"}
             subtitle={courseItem?.subject || "No Subject"}
             chapters={`Year: ${courseItem?.year || "N/A"}`}
-            items={10} // Placeholder for item count
-            progress={"20%"} // Placeholder for progress
+            // items={10} // Placeholder for item count
+            // progress={"20%"} // Placeholder for progress
           />
         ))}
       </div>
